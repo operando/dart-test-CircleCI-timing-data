@@ -11,6 +11,14 @@ jobs:
           name: Download dependencies
           command: pub get
       - run:
+          command: |
+            cat ${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/results.json
+            TESTFILES=$(circleci tests glob "test/**/*_test.dart" | circleci tests split --split-by=timings --timings-type=filename)
+            echo ----------------
+            echo ${TESTFILES}
+            TESTFILES=$(echo $TESTFILES | sed -e "s/ /,/g")
+            echo ${TESTFILES}
+      - run:
           name: Test
           command: dart run test --file-reporter json:test_results/tests_report.json --reporter expanded
       - run:
