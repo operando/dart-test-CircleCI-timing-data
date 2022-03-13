@@ -34,6 +34,8 @@ jobs:
           path: test_results/
       - store_artifacts:
           path: test_results/
+      - store_artifacts:
+          path: ${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/
 
 workflows:
   version: 2
