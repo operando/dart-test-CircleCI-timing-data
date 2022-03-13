@@ -12,7 +12,7 @@ jobs:
           command: pub get
       - run:
           name: Test
-          command: make run_test
+          command: dart run test --file-reporter json:test_results/tests_report.json --reporter expanded
       - store_test_results:
           path: test_results/
       - store_artifacts:
