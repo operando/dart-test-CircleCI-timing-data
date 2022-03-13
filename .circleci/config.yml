@@ -13,6 +13,15 @@ jobs:
       - run:
           name: Test
           command: dart run test --file-reporter json:test_results/tests_report.json --reporter expanded
+      - run:
+          name: Install JUnitReport
+          when: always
+          command: pub global activate junitreport
+      - run:
+          name: Convert tests to JUnit
+          when: always
+          command: |
+            $HOME/.pub-cache/bin/tojunit --input test_results/tests_report.json --output test_results/tests_report_junit.xml
       - store_test_results:
           path: test_results/
       - store_artifacts:
