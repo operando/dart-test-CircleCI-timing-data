@@ -9,5 +9,4 @@ test_results/
 .dart_tool
 
 .idea/
-.packages
 *.iml
