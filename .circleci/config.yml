@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Install JUnitReport
           when: always
-          command: pub global activate junitreport
+          command: dart pub global activate --source git https://github.com/operando/dart-junitreport.git
       - run:
           name: Convert tests to JUnit
           when: always
@@ -34,8 +34,6 @@ jobs:
           path: test_results/
       - store_artifacts:
           path: test_results/
-      - store_artifacts:
-          path: ${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/
 
 workflows:
   version: 2
