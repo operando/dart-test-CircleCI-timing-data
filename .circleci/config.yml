@@ -4,6 +4,7 @@ jobs:
   test:
     docker:
       - image: dart:2.16.1
+    parallelism: 2
     steps:
       - checkout
       - run:
@@ -11,7 +12,11 @@ jobs:
           command: pub get
       - run:
           name: Test
-          command: pub run test
+          command: make run_test
+      - store_test_results:
+          path: test_results/
+      - store_artifacts:
+          path: test_results/
 
 workflows:
   version: 2
