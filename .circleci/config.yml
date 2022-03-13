@@ -13,7 +13,7 @@ jobs:
       - run:
           command: |
             cat ${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/results.json
-            TESTFILES=$(circleci tests glob "test/**/*_test.dart" | circleci tests split --split-by=timings --timings-type=classname)
+            TESTFILES=$(circleci tests glob "test/**/*_test.dart" | circleci tests split --split-by=timings)
             echo ----------------
             echo ${TESTFILES}
             TESTFILES=$(echo $TESTFILES | sed -e "s/ /,/g")
@@ -30,6 +30,7 @@ jobs:
           when: always
           command: |
             $HOME/.pub-cache/bin/tojunit --input test_results/tests_report.json --output test_results/tests_report_junit.xml
+            sed -i -e "s|file:///root/project/||g" test_results/tests_report_junit.xml
       - store_test_results:
           path: test_results/
       - store_artifacts:
