@@ -13,7 +13,7 @@ jobs:
       - run:
           command: |
             cat ${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/results.json
-            TESTFILES=$(circleci tests glob "test/**/*_test.dart" | circleci tests split --split-by=timings --timings-type=filename)
+            TESTFILES=$(circleci tests glob "test/**/*_test.dart" | circleci tests split --split-by=timings --timings-type=classname)
             echo ----------------
             echo ${TESTFILES}
             TESTFILES=$(echo $TESTFILES | sed -e "s/ /,/g")
